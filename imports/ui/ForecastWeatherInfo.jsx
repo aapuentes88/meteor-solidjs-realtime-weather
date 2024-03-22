@@ -27,7 +27,7 @@ const ForecastWeatherInfo = (props) => {
   {/* Temperatura */}
   <div className="flex flex-col items-center justify-center"> {/* Centra horizontal y verticalmente */}
     <span className="text-2xl font-semibold text-gray-800">{temp}</span>
-    <span className="text-sm text-gray-600">Kelvin</span>
+    <span className="text-sm text-gray-600">Celsius</span>
   </div>
 </div>
     );
@@ -53,7 +53,7 @@ const ForecastWeatherInfo = (props) => {
           >
         {props.forecastWeatherData[0]?.list.map(item => {
           const itemDataToRender = { date: item.dt_txt, main: item.weather.main, description: item.weather.description,
-                                     temp: item.main.temp    }
+                                     temp: (item.main.temp - 273.15).toFixed(2)   }
           return (
             <SwiperSlide>              
               {forecastItem(itemDataToRender)}

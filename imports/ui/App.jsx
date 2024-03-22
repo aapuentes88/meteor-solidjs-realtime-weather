@@ -113,9 +113,10 @@ export const App = () => {
   createEffect(() => {
 
     const obj = weatherCollection()[0]
-    if(obj /*&& obj1*/ && isReady()) {
+    if(obj && isReady()) {
+    const main = {...obj.main, windspeed: obj.wind.speed}
     const wD = {city: obj.city, date: obj.createdAt, 
-    description: obj.weather.description, main: obj.main}
+    description: obj.weather.description, main}
     setWeatherData(wD)
     }
   }, [weatherCollection]);
