@@ -1,7 +1,7 @@
 import { createEffect } from "solid-js";
 
 const WeatherInfo = (props) => {
-  // const  {weatherData}  = props;
+  // const  {weatherData}  = props; //No se debedesestructurar props en solid  
 
   // Función para formatear la fecha
   const formatDate = (date) => {

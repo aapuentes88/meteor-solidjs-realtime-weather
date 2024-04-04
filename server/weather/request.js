@@ -1,7 +1,7 @@
 import { fetch } from 'meteor/fetch'
 
 export class Request {
-  constructor ({ url, method, latitude, longitude, apikey, timeout }) {
+  constructor ({ url, method, timeout }) {
     // config
     this.method = method
     this.url = url; 
@@ -33,7 +33,8 @@ export class Request {
     }
   }
 
-  toDocument () {
+  toWeatherDocument () {
+
     const document = {
       coordinates: this.response?.coord,
       createdAt: new Date(),
@@ -47,16 +48,22 @@ export class Request {
       hasTimedOut: !!this.hasTimedOut,
       error: this.error
     }    
-    document.main.temp = (document.main.temp - 273.15).toFixed(2)
-    document.main.feels_like = (document.main.feels_like - 273.15).toFixed(2)
-    document.main.temp_min = (document.main.temp_min - 273.15).toFixed(2)
-    document.main.temp_max =  (document.main.temp_max - 273.15).toFixed(2)
+
+    document.main.temp = (document.main.temp - 273.15)
+                         .toFixed(2)
+    document.main.feels_like = (document.main.feels_like - 273.15)
+                               .toFixed(2)
+    document.main.temp_min = (document.main.temp_min - 273.15)
+                             .toFixed(2)
+    document.main.temp_max =  (document.main.temp_max - 273.15)
+                              .toFixed(2)
    
     return document
   }
 
-  toForecast () {
-    const forecast = {
+  toForecastDocument () {
+
+    const document = {
       coordinates: this.response?.city.coord,
       createdAt: new Date(),
       city: this.response?.city.name,
@@ -65,6 +72,6 @@ export class Request {
       error: this.error
     }    
  
-    return forecast
+    return document
   }
 }

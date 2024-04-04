@@ -20,17 +20,17 @@ export const FilterOptions = (props) => {
         console.error('Error al detener el monitor:', error);
       } else {
         console.log('Monitor detenido con éxito', result);
+        getCoordinates(city()).then(coordinates => {
+          if(coordinates) {
+           props.handleFilterOptions(coordinates.city)
+           setCity('')
+          }
+        }).catch(error => {
+          props.handleError(error.toString())
+       });
       }
     });
-
-    // props.handleFilterOptions({lon: 32.653226, lat: -79.3831843})
-    getCoordinates(city()).then(coordinates => {
-      props.handleFilterOptions({lon: coordinates.longitude, lat: coordinates.latitude})
-      setCity('')
-
-    }).catch(error => {
-      props.handleError(error.toString())
-    });
+    
   };
 
   return (

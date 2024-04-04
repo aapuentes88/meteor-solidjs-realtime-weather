@@ -26,7 +26,8 @@ export const getCoordinates = async (city) => {
     const data = await response.json();
     if (data /*&& data.length > 0*/) {
       const location = data.coord;
-      return { latitude: parseFloat(location.lat), longitude: parseFloat(location.lon) };
+      const city = data.name;
+      return { latitude: parseFloat(location.lat), longitude: parseFloat(location.lon), city };
     } else {
       throw new Error('No se encontraron coordenadas para la ciudad proporcionada.');
     }
@@ -37,10 +38,12 @@ export const getCoordinates = async (city) => {
 
 export const getCityAndCountry = async (latitude, longitude) => {
   try {
-    const response = await fetch(`https://nominatim.openstreetmap.org/reverse?lat=${latitude}&lon=${longitude}&format=json`);
+    const response = await fetch(`https://api.openweathermap.org/data/2.5/weather?lat=${latitude}&lon=${longitude}&appid=3711ed351cd8264e86e3db88adc15941`);
     const data = await response.json();
-    const { city, country } = data.address;
-    return { city, country };
+    // const { city, country } = data.address;
+    // return { city, country };
+    const  city = data.name;
+    return { city }
   } catch (error) {
     console.error('Error fetching city and country:', error);
     return null;

@@ -7,9 +7,7 @@ const monitorState = {};
 
 // Función para preparar la inicializacion del monitor
 Monitor.prepare = async () => {
-
-  Monitor.up = true
-  
+  Monitor.up = true  
 };
 
 Monitor.setIdentifier =  (id) => {
@@ -29,7 +27,7 @@ Monitor.getForecastIdentifier =  () => {
 }
 
 // Función para actualizar el estado del monitor según el resultado de la última solicitud
-Monitor.add = async (document) => {
+Monitor.addWeather = async (document) => {
   
   if(Monitor.up)
   await WeatherCollection.insertAsync(document)
