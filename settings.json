@@ -5,10 +5,12 @@
       "method": "GET",
       "url": "https://api.openweathermap.org/data/2.5/",
       "apikey":"3711ed351cd8264e86e3db88adc15941",
+      "proxy": null,
       "timeout": 10000,
       "interval": 3000,
       "forecastInterval": 3600000,
-      "response": 200
+      "response": 200,
+      "comment": "proxy:http://127.0.0.1:8082"
     }
   }
 }
